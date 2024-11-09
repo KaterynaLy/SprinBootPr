@@ -4,80 +4,38 @@
  */
 package com.example;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class Tratamiento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long idTratamiento;
-    
-    @Column(name = "nombre")
-    private String nombre;
-    
-    @Column(name = "descripcion")
+    private Long id;
     private String descripcion;
-    
-    @Column(name = "presupuesto")
-    private Double presupuesto;
-    
-    @Column(name = "fechaInicio")
-    private Date fechaInicio;
-    
-   @Column(name = "fechaFin") 
-    private Date fechaFin;
-    
-    private Boolean aprobado;  // Indica si el presupuesto fue aprobado
-
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
+    private String nombre;
+    private BigDecimal presupuesto;
+    private Boolean aprobado;
     @ManyToOne
-    @JoinColumn(name = "idPaciente")
+    @JoinColumn(name = "idPaciente", referencedColumnName = "id")
     private Paciente paciente;
 
-    @OneToMany(mappedBy = "tratamiento")
-    private List<Documento> documentos;
-
-    //id, descripcion, fechaInicio, fechaFin, idPaciente, presupuesto
-
+//id, descripcion, fechaInicio, fechaFin, idPaciente, nombre, presupuesto, aprobado
     public Tratamiento() {
     }
 
-    public Tratamiento(Long idTratamiento, String nombre, String descripcion, Double presupuesto, Date fechaInicio, Date fechaFin, Boolean aprobado, Paciente paciente, List<Documento> documentos) {
-        this.idTratamiento = idTratamiento;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.presupuesto = presupuesto;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.aprobado = aprobado;
-        this.paciente = paciente;
-        this.documentos = documentos;
+    public Long getId() {
+        return id;
     }
 
-    public Long getIdTratamiento() {
-        return idTratamiento;
-    }
-
-    public void setIdTratamiento(Long idTratamiento) {
-        this.idTratamiento = idTratamiento;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescripcion() {
@@ -88,28 +46,36 @@ public class Tratamiento {
         this.descripcion = descripcion;
     }
 
-    public Double getPresupuesto() {
-        return presupuesto;
-    }
-
-    public void setPresupuesto(Double presupuesto) {
-        this.presupuesto = presupuesto;
-    }
-
-    public Date getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public BigDecimal getPresupuesto() {
+        return presupuesto;
+    }
+
+    public void setPresupuesto(BigDecimal presupuesto) {
+        this.presupuesto = presupuesto;
     }
 
     public Boolean getAprobado() {
@@ -128,18 +94,4 @@ public class Tratamiento {
         this.paciente = paciente;
     }
 
-    public List<Documento> getDocumentos() {
-        return documentos;
-    }
-
-    public void setDocumentos(List<Documento> documentos) {
-        this.documentos = documentos;
-    }
-
-    @Override
-    public String toString() {
-        return "Tratamiento{" + "idTratamiento=" + idTratamiento + ", nombre=" + nombre + ", descripcion=" + descripcion + ", presupuesto=" + presupuesto + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", aprobado=" + aprobado + ", paciente=" + paciente + ", documentos=" + documentos + '}';
-    }
-    
-    
-}
+} 

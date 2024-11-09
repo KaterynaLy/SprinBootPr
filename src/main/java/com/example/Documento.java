@@ -23,8 +23,8 @@ public class Documento {
     @Column(name = "fechaFirma")
     private Date fechaFirma;
 
-     @ManyToOne
-    @JoinColumn(name = "idPaciente")
+    @ManyToOne
+    @JoinColumn(name = "idPaciente", referencedColumnName = "id")
     private Paciente paciente;
      
     @ManyToOne

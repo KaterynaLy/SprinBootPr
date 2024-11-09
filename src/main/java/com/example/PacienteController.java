@@ -5,26 +5,57 @@
 package com.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/pacientes")
+@RequestMapping("/api/paciente")
 public class PacienteController {
 
-    @Autowired
+  @Autowired
     private PacienteService pacienteService;
 
-    @GetMapping
-    public List<Paciente> obtenerTodosLosPacientes() {
-        return pacienteService.obtenerTodosLosPacientes();
+      /*@GetMapping("/{id}/perfil")
+    public Paciente obtenerPerfil(@PathVariable Long id) {
+        return pacienteService.obtenerPacientePorId(id);
     }
 
-    @PostMapping
-    public Paciente guardarPaciente(@RequestBody Paciente paciente) {
-        return pacienteService.guardarPaciente(paciente);
+    @GetMapping("/{id}/documentos")
+    public List<Documento> obtenerDocumentos(@PathVariable Long id) {
+        return pacienteService.obtenerDocumentosPorPaciente(id);
     }
 
-    // Otros métodos como actualizar y eliminar paciente
+    @GetMapping("/{id}/presupuestos")
+    public List<Presupuesto> obtenerPresupuestos(@PathVariable Long id) {
+        return pacienteService.obtenerPresupuestosPorPaciente(id);
+    }
+
+    @GetMapping("/{id}/tratamientos")
+    public List<Tratamiento> obtenerTratamientos(@PathVariable Long id) {
+        return pacienteService.obtenerTratamientosPorPaciente(id);
+    }*/
+
+    @GetMapping("/{id}/perfil-completo")
+    public ResponseEntity<?> obtenerPerfilCompleto(@PathVariable Long id) {
+        try {
+            Paciente perfil = pacienteService.obtenerPacientePorId(id);
+            List<Documento> documentos = pacienteService.obtenerDocumentosPorPaciente(id);
+            List<Presupuesto> presupuestos = pacienteService.obtenerPresupuestosPorPaciente(id);
+            List<Tratamiento> tratamientos = pacienteService.obtenerTratamientosPorPaciente(id);
+
+            // Crear un objeto para el perfil completo
+            PacientePerfilCompleto perfilCompleto = new PacientePerfilCompleto(perfil, documentos, presupuestos, tratamientos);
+
+            return ResponseEntity.ok(perfilCompleto);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al cargar el perfil completo del paciente.");
+        }
+    }
+
 }

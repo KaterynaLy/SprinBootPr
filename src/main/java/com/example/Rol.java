@@ -11,15 +11,17 @@ public class Rol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idRol") 
     private Long idRol;
-
+    
+    @Column(name = "nombreRol") 
     private String nombreRol; // Por ejemplo, "Administrador", "Paciente", etc.
 
-    // Constructor, getters, setters
+       //idRol, nombreRol
     public Rol(String nombreRol) {
         this.nombreRol = nombreRol;
     }
-    //idRol, nombreRol
+
 
     public Long getIdRol() {
         return idRol;

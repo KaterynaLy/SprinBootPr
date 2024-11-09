@@ -15,21 +15,9 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private RolRepository rolRepository;
-
-    /*public Usuario crearUsuario(Usuario usuario) {
-        // Lógica para crear un usuario (en este caso no estamos encriptando la contraseña)
-        return usuarioRepository.save(usuario);
-    }*/
-    
-     public Usuario autenticarUsuario(String email, String password) {
-        return usuarioRepository.findUsuario(email, password);
-    }
-    
-
     public List<Usuario> listarUsuarios() {
         return usuarioRepository.findAll();
     }
+
 }
 

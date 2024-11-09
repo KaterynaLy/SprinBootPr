@@ -5,35 +5,33 @@
 package com.example;
 
 import java.util.List;
+import javax.naming.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-
 
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
 
     @Autowired
-    private UsuarioService usuarioService;
+    private AuthService authService;  // Cambié a AuthService
 
-    /*@PostMapping("/crear")
-    public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario usuario) {
-        Usuario nuevoUsuario = usuarioService.crearUsuario(usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuario);
-    }*/
+    @Autowired
+    private UsuarioService usuarioService;
 
     @GetMapping("/listar")
     public List<Usuario> listarUsuarios() {
         return usuarioService.listarUsuarios();
     }
+
     @PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String password) {
-        Usuario usuario = usuarioService.autenticarUsuario(email, password);
-        if (usuario != null) {
-            return "Inicio de sesión exitoso: " + usuario.getNombreUsuario();
-        } else {
-            return "Credenciales incorrectas";
+    public ResponseEntity<Usuario> login(@RequestBody Usuario loginRequest) {
+        try {
+            Usuario usuario = authService.autenticarUsuario(loginRequest.getEmail(), loginRequest.getPassword());
+            return ResponseEntity.ok(usuario);
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
-    }    
+    }   
 }

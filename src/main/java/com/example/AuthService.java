@@ -4,23 +4,23 @@
  */
 package com.example;
 
+import java.util.Optional;
+import javax.naming.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
 
-     @Autowired
+    @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public Usuario autenticarUsuario(String email, String password) {
+    public Usuario autenticarUsuario(String email, String password) throws AuthenticationException {
         Usuario usuario = usuarioRepository.findByEmailAndPassword(email, password);
         if (usuario != null) {
-            return usuario;
+            return usuario; // Devuelve el usuario encontrado
         } else {
-            throw new RuntimeException("Credenciales incorrectas");
+            throw new AuthenticationException("Credenciales inválidas");
         }
     }
 }
-
-

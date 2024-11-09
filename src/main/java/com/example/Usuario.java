@@ -4,6 +4,7 @@
  */
 package com.example;
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -76,6 +77,20 @@ public class Usuario {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+    
+      @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(email, usuario.email) && Objects.equals(password, usuario.password);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, password);
+    }
 }
+
+
 
