@@ -4,11 +4,13 @@
  */
 package com.example;
 
-import java.util.List;
-import javax.naming.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.naming.AuthenticationException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -26,12 +28,12 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Usuario> login(@RequestBody Usuario loginRequest) {
+    public ResponseEntity login(@RequestBody Usuario loginRequest) {
         try {
             Usuario usuario = authService.autenticarUsuario(loginRequest.getEmail(), loginRequest.getPassword());
             return ResponseEntity.ok(usuario);
         } catch (AuthenticationException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
     }   
 }
