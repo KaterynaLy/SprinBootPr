@@ -16,10 +16,10 @@ import java.util.Optional;
 @RequestMapping("/api/paciente")
 public class PacienteController {
 
-  @Autowired
+    @Autowired
     private PacienteService pacienteService;
 
-      /*@GetMapping("/{id}/perfil")
+    /*@GetMapping("/{id}/perfil")
     public Paciente obtenerPerfil(@PathVariable Long id) {
         return pacienteService.obtenerPacientePorId(id);
     }
@@ -38,7 +38,6 @@ public class PacienteController {
     public List<Tratamiento> obtenerTratamientos(@PathVariable Long id) {
         return pacienteService.obtenerTratamientosPorPaciente(id);
     }*/
-
     @GetMapping("/{id}/perfil-completo")
     public ResponseEntity<?> obtenerPerfilCompleto(@PathVariable Long id) {
         try {
@@ -56,6 +55,29 @@ public class PacienteController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error al cargar el perfil completo del paciente.");
         }
+    }
+
+    @RestController
+    @RequestMapping("/presupuestos")
+    public class PresupuestoController {
+
+        private final PresupuestoService presupuestoService;
+
+        public PresupuestoController(PresupuestoService presupuestoService) {
+            this.presupuestoService = presupuestoService;
+        }
+
+        @GetMapping("/{id}")
+        public ResponseEntity<Presupuesto> obtenerPresupuesto(@PathVariable Long id) {
+            Presupuesto presupuesto = presupuestoService.obtenerPresupuesto(id);
+            return ResponseEntity.ok(presupuesto);
+        }
+    }
+    
+     @PostMapping("/add")
+    public ResponseEntity<Paciente> addPatient(@RequestBody Paciente paciente) {
+        Paciente savedPaciente = pacienteService.addPaciente(paciente);
+        return ResponseEntity.ok(savedPaciente);
     }
 
 }

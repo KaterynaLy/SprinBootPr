@@ -7,6 +7,16 @@ package com.example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Service
 public class PacienteService {
@@ -22,6 +32,10 @@ public class PacienteService {
 
     @Autowired
     private TratamientoRepository tratamientoRepository;
+    
+     public Paciente addPaciente(Paciente paciente) {
+        return pacienteRepository.save(paciente);
+    }
 
     public Paciente obtenerPacientePorId(Long idPaciente) {
         return pacienteRepository.findById(idPaciente)
@@ -39,4 +53,5 @@ public class PacienteService {
     public List<Tratamiento> obtenerTratamientosPorPaciente(Long idPaciente) {
         return tratamientoRepository.findByPaciente_Id(idPaciente);
     }
+     
 }

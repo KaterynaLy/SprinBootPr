@@ -27,12 +27,6 @@ public class PresupuestoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoPresupuesto);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Presupuesto> obtenerPresupuesto(@PathVariable Long id) {
-        Presupuesto presupuesto = presupuestoService.obtenerPresupuesto(id);
-        return ResponseEntity.ok(presupuesto);
-    }
-
     @GetMapping("/listar")
     public List<Presupuesto> listarPresupuestos() {
         return presupuestoService.listarPresupuestos();
