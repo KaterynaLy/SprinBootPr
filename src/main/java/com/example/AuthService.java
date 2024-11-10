@@ -4,10 +4,10 @@
  */
 package com.example;
 
-import java.util.Optional;
-import javax.naming.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.naming.AuthenticationException;
 
 @Service
 public class AuthService {
@@ -15,12 +15,26 @@ public class AuthService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private RolRepository rolRepository;
+
     public Usuario autenticarUsuario(String email, String password) throws AuthenticationException {
         Usuario usuario = usuarioRepository.findByEmailAndPassword(email, password);
-        if (usuario != null) {
-            return usuario; // Devuelve el usuario encontrado
-        } else {
+
+        if (usuario == null) {
             throw new AuthenticationException("Credenciales inválidas");
         }
+
+        if (usuario.getRol() == null) {
+            throw new AuthenticationException("Rol hueco");
+        }
+
+        var roles = rolRepository.findAll();
+        var rol = usuario.getRol();
+
+        if (!roles.contains(rol)) {
+            throw new AuthenticationException("Rol inválida");
+        }
+        return usuario;
     }
 }

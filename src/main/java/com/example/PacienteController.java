@@ -10,7 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+/*<<<<<<< HEAD
 
+=======
+>>>>>>> 6f70ef6d9ba40a98038175a0de7d8aae6688d372*/
 
 @RestController
 @RequestMapping("/api/paciente")
