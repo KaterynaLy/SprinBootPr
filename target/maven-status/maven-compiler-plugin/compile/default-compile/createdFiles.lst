@@ -1,9 +1,9 @@
 com\example\DocumentoController.class
 com\example\Paciente.class
-com\example\AuthController.class
 com\example\TratamientoController.class
 com\example\Presupuesto.class
 com\example\Caja.class
+com\example\PacienteController$PresupuestoController.class
 com\example\PresupuestoService.class
 com\example\PresupuestoRepository.class
 com\example\BasicApplication.class
@@ -14,9 +14,9 @@ com\example\PacienteRepository.class
 com\example\TratamientoService.class
 com\example\UsuarioRepository.class
 com\example\UsuarioController.class
-com\example\LoginRequest.class
 com\example\PacienteController.class
 com\example\Tratamiento.class
+com\example\PacientePerfilCompleto.class
 com\example\UsuarioService.class
 com\example\DocumentoRepository.class
 com\example\PacienteService.class
@@ -28,6 +28,7 @@ com\example\Usuario.class
 com\example\FinanciacionRepository.class
 com\example\Documento.class
 com\example\AuthService.class
+com\example\WebConfig.class
 com\example\CajaController.class
 com\example\FinanciacionService.class
 com\example\CajaService.class

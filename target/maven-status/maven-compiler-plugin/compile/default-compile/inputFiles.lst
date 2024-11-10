@@ -11,9 +11,9 @@ C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\Presup
 C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\Rol.java
 C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\RolRepository.java
 C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\Documento.java
-C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\LoginRequest.java
 C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\PresupuestoService.java
 C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\PacienteService.java
+C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\PacientePerfilCompleto.java
 C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\Paciente.java
 C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\UsuarioService.java
 C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\TratamientoRepository.java
@@ -26,6 +26,7 @@ C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\Usuari
 C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\Caja.java
 C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\Tratamiento.java
 C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\TratamientoController.java
+C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\WebConfig.java
 C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\CajaService.java
 C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\TratamientoService.java
 C:\Users\c\OneDrive\Documentos\ClinicaDentalApp\src\main\java\com\example\Financiacion.java
