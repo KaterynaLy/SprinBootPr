@@ -18,9 +18,9 @@ CREATE SCHEMA IF NOT EXISTS `clinica_dental` DEFAULT CHARACTER SET utf8mb4 COLLA
 USE `clinica_dental` ;
 
 -- -----------------------------------------------------
--- Table `clinica_dental`.`paciente`
+-- Table `clinica_dental`.`Paciente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `clinica_dental`.`paciente` (
+CREATE TABLE IF NOT EXISTS `clinica_dental`.`Paciente` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(100) NOT NULL,
   `apellido` VARCHAR(100) NOT NULL,
@@ -44,9 +44,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `clinica_dental`.`financiacion`
+-- Table `clinica_dental`.`Financiacion`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `clinica_dental`.`financiacion` (
+CREATE TABLE IF NOT EXISTS `clinica_dental`.`Financiacion` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `montoTotal` DECIMAL(10,2) NOT NULL,
   `cuotas` INT NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`financiacion` (
   INDEX `idPaciente` (`idPaciente` ASC) VISIBLE,
   CONSTRAINT `financiacion_ibfk_1`
     FOREIGN KEY (`idPaciente`)
-    REFERENCES `clinica_dental`.`paciente` (`id`)
+    REFERENCES `clinica_dental`.`Paciente` (`id`)
     ON DELETE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 6
@@ -69,9 +69,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `clinica_dental`.`caja`
+-- Table `clinica_dental`.`Caja`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `clinica_dental`.`caja` (
+CREATE TABLE IF NOT EXISTS `clinica_dental`.`Caja` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `fechaPago` DATE NOT NULL,
   `monto` DECIMAL(10,2) NOT NULL,
@@ -84,11 +84,11 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`caja` (
   INDEX `idFinanciacion` (`idFinanciacion` ASC) VISIBLE,
   CONSTRAINT `caja_ibfk_1`
     FOREIGN KEY (`idPaciente`)
-    REFERENCES `clinica_dental`.`paciente` (`id`)
+    REFERENCES `clinica_dental`.`Paciente` (`id`)
     ON DELETE CASCADE,
   CONSTRAINT `caja_ibfk_2`
     FOREIGN KEY (`idFinanciacion`)
-    REFERENCES `clinica_dental`.`financiacion` (`id`)
+    REFERENCES `clinica_dental`.`Financiacion` (`id`)
     ON DELETE SET NULL)
 ENGINE = InnoDB
 AUTO_INCREMENT = 6
@@ -97,22 +97,22 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `clinica_dental`.`tratamiento`
+-- Table `clinica_dental`.`Tratamiento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `clinica_dental`.`tratamiento` (
+CREATE TABLE IF NOT EXISTS `clinica_dental`.`Tratamiento` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `descripcion` TEXT NOT NULL,
   `fechaInicio` DATE NULL DEFAULT NULL,
   `fechaFin` DATE NULL DEFAULT NULL,
   `idPaciente` BIGINT NULL DEFAULT NULL,
   `nombre` VARCHAR(150) NOT NULL,
-  `presupuesto` DECIMAL(10,2) NOT NULL,
+  `Presupuesto` DECIMAL(10,2) NOT NULL,
   `aprobado` BIT(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `idPaciente` (`idPaciente` ASC) VISIBLE,
   CONSTRAINT `tratamiento_ibfk_1`
     FOREIGN KEY (`idPaciente`)
-    REFERENCES `clinica_dental`.`paciente` (`id`)
+    REFERENCES `clinica_dental`.`Paciente` (`id`)
     ON DELETE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 6
@@ -121,9 +121,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `clinica_dental`.`documento`
+-- Table `clinica_dental`.`Documento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `clinica_dental`.`documento` (
+CREATE TABLE IF NOT EXISTS `clinica_dental`.`Documento` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `nombreDocumento` VARCHAR(255) NOT NULL,
   `fechaFirma` DATE NULL DEFAULT NULL,
@@ -135,11 +135,11 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`documento` (
   INDEX `idTratamiento` (`idTratamiento` ASC) VISIBLE,
   CONSTRAINT `documento_ibfk_1`
     FOREIGN KEY (`idPaciente`)
-    REFERENCES `clinica_dental`.`paciente` (`id`)
+    REFERENCES `clinica_dental`.`Paciente` (`id`)
     ON DELETE CASCADE,
   CONSTRAINT `documento_ibfk_2`
     FOREIGN KEY (`idTratamiento`)
-    REFERENCES `clinica_dental`.`tratamiento` (`id`)
+    REFERENCES `clinica_dental`.`Tratamiento` (`id`)
     ON DELETE SET NULL)
 ENGINE = InnoDB
 AUTO_INCREMENT = 6
@@ -148,9 +148,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `clinica_dental`.`presupuesto`
+-- Table `clinica_dental`.`Presupuesto`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `clinica_dental`.`presupuesto` (
+CREATE TABLE IF NOT EXISTS `clinica_dental`.`Presupuesto` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `descripcion` TEXT NOT NULL,
   `monto` DECIMAL(10,2) NOT NULL,
@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`presupuesto` (
   INDEX `idPaciente` (`idPaciente` ASC) VISIBLE,
   CONSTRAINT `presupuesto_ibfk_1`
     FOREIGN KEY (`idPaciente`)
-    REFERENCES `clinica_dental`.`paciente` (`id`)
+    REFERENCES `clinica_dental`.`Paciente` (`id`)
     ON DELETE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 6
@@ -171,22 +171,25 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `clinica_dental`.`rol`
+-- Table `clinica_dental`.`Rol`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `clinica_dental`.`rol` (
+CREATE TABLE IF NOT EXISTS `clinica_dental`.`Rol` (
   `idRol` BIGINT NOT NULL AUTO_INCREMENT,
-  `nombreRol` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`idRol`))
+  `nombreRol` VARCHAR(255) NOT NULL DEFAULT 'UsuarioRegular',
+    PRIMARY KEY (`idRol`),
+    INDEX `idx_idRol` (`idRol`)
+    )
 ENGINE = InnoDB
 AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
+
 -- -----------------------------------------------------
--- Table `clinica_dental`.`usuario`
+-- Table `clinica_dental`.`Usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `clinica_dental`.`usuario` (
+CREATE TABLE IF NOT EXISTS `clinica_dental`.`Usuario` (
   `idUsuario` BIGINT NOT NULL AUTO_INCREMENT,
   `nombreUsuario` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
@@ -197,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `clinica_dental`.`usuario` (
   INDEX `idRol` (`idRol` ASC) VISIBLE,
   CONSTRAINT `usuario_ibfk_1`
     FOREIGN KEY (`idRol`)
-    REFERENCES `clinica_dental`.`rol` (`idRol`))
+    REFERENCES `clinica_dental`.`Rol` (`idRol`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8mb4
