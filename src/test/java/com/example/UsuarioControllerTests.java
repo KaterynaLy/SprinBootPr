@@ -1,5 +1,9 @@
 package com.example;
 
+import com.proyecto_clinica.usuario.Usuario;
+import com.proyecto_clinica.usuario.UsuarioController;
+import com.proyecto_clinica.usuario.UsuarioService;
+import com.proyecto_clinica.AuthService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;

@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+.contenedor {
+    display: flex;
+    gap: 20px;
+}
+
+section {
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos específicos para la consulta rápida (parte izquierda) */
+.consulta-rapida {
+    flex: 1;
+    max-width: 300px;
+}
+
+/* Estilos específicos para gestionar pacientes (parte derecha) */
+.gestionar-pacientes {
+    flex: 2;
+}
+
+/* Campos y botones */
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="number"],
+button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Estilos para el perfil completo */
+#perfil {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Lista de pacientes */
+#listaPaciente {
+    list-style-type: none;
+    padding: 0;
+}
+
+#listaPaciente li {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+#listaPaciente li:last-child {
+    border-bottom: none;
+}
+
+#listaPaciente button {
+    margin-top: 5px;
+    background-color: #d9534f;
+}
+
+#listaPaciente button:hover {
+    background-color: #c9302c;
+}

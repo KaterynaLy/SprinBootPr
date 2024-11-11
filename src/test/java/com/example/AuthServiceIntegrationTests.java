@@ -1,5 +1,10 @@
 package com.example;
 
+import com.proyecto_clinica.rol.RolRepository;
+import com.proyecto_clinica.rol.Rol;
+import com.proyecto_clinica.usuario.Usuario;
+import com.proyecto_clinica.usuario.UsuarioRepository;
+import com.proyecto_clinica.AuthService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
